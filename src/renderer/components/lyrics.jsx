@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = (props) => (
   <div className="album-header">
-    <img src={props.album.images[0].url} height={90}/>
+    <img src={props.album.images[0].url} />
     <div className="song-info">
       <div className="title">{props.title}</div>
       <div className="artist">{props.artist}</div>

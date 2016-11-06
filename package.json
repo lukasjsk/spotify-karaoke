@@ -1,0 +1,23 @@
+{
+  "name": "spotify-karaoke",
+  "version": "1.0.0",
+  "description": "Displays lyric of song currently playin in Spotify desktop client",
+  "main": "src/app.js",
+  "author": "Lukas Jusko",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.15.2",
+    "express": "^4.14.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  },
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "babel-preset-es2016-node5": "^1.1.2",
+    "babel-preset-react": "^6.5.0",
+    "electron-prebuilt-compile": "^1.1.3"
+  }
+}

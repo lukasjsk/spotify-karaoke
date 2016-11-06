@@ -29,7 +29,7 @@ app.on('ready', () => {
   mainWindow.loadURL(`file://${__dirname}/renderer/index.html`);
 });
 
-api.get('/', async (req, res) => {
+api.get('/', async(req, res) => {
   try {
     if (!oauthToken) {
       oauthToken = await spotifyConnector.getOauthToken();
@@ -39,6 +39,10 @@ api.get('/', async (req, res) => {
     }
     const status = await spotifyConnector.getStatus(oauthToken, csrfToken);
     const currentSong = await spotifyConnector.getCurrentSong(status);
+
+    if (!currentSong) {
+      throw new Error('Unable to retrieve song information. Is Spotify Running?')
+    }
 
     res.send({
       // oauthToken: oauthToken,
@@ -51,13 +55,14 @@ api.get('/', async (req, res) => {
     oauthToken = null;
     csrfToken = null;
 
-    res.send({
-      currentSong: {}
-    });
+    // res.send(404, {error: e});
+    console.log(e.message);
+
+    res.status(404).send({error: e.message});
   }
 });
 
-api.listen(3091, () =>{
+api.listen(3091, () => {
   console.log('SpotifyConector API available on port 3091');
 });
 

@@ -26,7 +26,7 @@ export default class SpotifyConnector {
       const data = response.data;
       return data.t;
     } catch (e) {
-      console.log(e);
+      throw new Error('Unable to retrieve OAuth token.');
     }
   }
 
@@ -39,7 +39,7 @@ export default class SpotifyConnector {
       const data = response.data;
       return data.token;
     } catch (e) {
-      console.log(e);
+      throw new Error('Unable to retrieve CSRF token.');
     }
   }
 
@@ -56,7 +56,7 @@ export default class SpotifyConnector {
       const data = response.data;
       return data;
     } catch (e) {
-      console.log(e);
+      throw new Error('Unable to retrieve Spotify status.');
     }
   }
 
@@ -82,15 +82,19 @@ export default class SpotifyConnector {
           return result;
         }
       } catch (e) {
-        console.log(e);
+        throw new Error('Unable to process song information.');
       }
     }
   }
 
   async getAlbumImages(albumUri, oauthToken) {
-    const id = albumUri.split('spotify:album:')[1];
-    const url = `https://api.spotify.com/v1/albums/${id}?oauth=${oauthToken}`;
-    const response = await axios.get(url);
-    return response.data.images;
+    try {
+      const id = albumUri.split('spotify:album:')[1];
+      const url = `https://api.spotify.com/v1/albums/${id}?oauth=${oauthToken}`;
+      const response = await axios.get(url);
+      return response.data.images;
+    } catch (e) {
+      throw new Error('Unable to retrieve album artwork.');
+    }
   }
 }

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Error = (props) => (
   <div className="error-container">
-    {props.error.message}
+    {props.error}
   </div>
 );
 
@@ -31,7 +31,7 @@ export default class Main extends React.Component {
       } catch (e) {
         this.setState({
           showError: true,
-          errorMessage: e
+          errorMessage: e.response.data.error
         })
       }
     }, 5000);

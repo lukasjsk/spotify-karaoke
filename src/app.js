@@ -19,12 +19,12 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    width: 700,
+    width: 500,
     height: 760,
-    //titleBarStyle: 'hidden-inset'
+    // titleBarStyle: 'hidden-inset'
   });
 
-  mainWindow.openDevTools();
+  // mainWindow.openDevTools();
 
   mainWindow.loadURL(`file://${__dirname}/renderer/index.html`);
 });

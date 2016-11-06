@@ -17,10 +17,17 @@ export default class Lyrics extends React.Component {
     super();
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.artist !== nextProps.artist && this.props.title !== nextProps.title;
+  }
+
   render() {
     return (
       <div className="lyrics-container">
-        <Header {...this.props.currentSong}/>
+        <Header {...this.props}/>
+        <div className="lyrics">
+          {this.props.lyrics}
+        </div>
       </div>
     );
   }
